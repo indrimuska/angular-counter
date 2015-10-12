@@ -6,8 +6,8 @@
 		function Counter(timeout) {
 			this.restrict = 'EAC';
 			this.scope = {
-				to:	      '=',
-				value:	  '=',
+				to:       '=',
+				value:    '=',
 				effect:   '=?',
 				duration: '=?',
 				finish:   '&?'
