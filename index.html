@@ -101,10 +101,10 @@
 			<h3>Usage</h3>
 			<pre><code class="html" ng-non-bindable>&lt;!-- `counter` directive can be used as: Element / Class / Attribute --&gt;
 &lt;div    class=&quot;counter&quot;
-        value=&quot;ctrl.value&quot;
-           to=&quot;ctrl.to&quot;
-     duration=&quot;ctrl.duration&quot;
-       effect=&quot;ctrl.effect&quot;
+        value=&quot;ctrl.myValue&quot;
+           to=&quot;ctrl.numberToReach&quot;
+     duration=&quot;ctrl.theDuration&quot;
+       effect=&quot;ctrl.myEffect&quot;
        finish=&quot;ctrl.counterFinish()&quot;&gt; {{ ctrl.value | number:0 }} % &lt;/div&gt;
 
 &lt;!-- bind counter value anywhere --&gt;
