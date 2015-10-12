@@ -2,6 +2,8 @@
 
 **Angular Counter** is a *directive* to animate number increment/decrement.
 
+Check out the demo page at http://indrimuska.github.io/angular-counter.
+
 ![Angular Counter](http://indrimuska.github.io/angular-counter/img/angular-counter.gif)
 
 ## Dependencies
