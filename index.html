@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:og="http://ogp.me/ns#" xmlns:fb="http://www.facebook.com/2008/fbml" ng-app="AngularCounterDemo">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		
+		<title>Angular Selector</title>
+		<meta name="description" content="Angular Counter is a directive to animate number increment/decrement.">
+		<meta name="author" content="Indri Muska <indrimuska@gmail.com>">
+		<meta name="keywords" content="animate number increment decrement angular jquery">
+		
+		<!-- Open Graph Meta Tags -->
+		<meta property="og:title" content="Angular Counter">
+		<meta property="og:site_name" content="Angular Counter">
+		<meta property="og:url" content="http://indrimuska.github.io/angular-counter/">
+		<meta property="og:description" content="Angular Counter is a directive to animate number increment/decrement.">
+		<meta property="og:image" content="http://indrimuska.github.io/angular-counter/img/angular-counter.png">
+		<meta property="og:type" content="website">
+		
+		<!-- Stylesheets -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Varela+Round">
+		<link rel="stylesheet" href="style.css">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.3/styles/github.min.css">
+	</head>
+	<body itemscope itemtype="http://schema.org/SoftwareApplication" ng-controller="AngularCounterDemoCtrl as ctrl" ng-cloak>
+		<div class="container">
+			<h1>
+				<a href="https://github.com/indrimuska/angular-counter" target="_blank">
+					<i class="fa fa-github"></i>&nbsp;
+					<span itemprop="name">Angular Counter</span>&nbsp;
+					<i class="fa fa-caret-right"></i>
+				</a>
+			</h1>
+			<p class="lead">Angular Counter is a directive to animate number increment/decrement.</p>
+			<ul class="list-inline">
+				<li>
+					<a class="github-button" href="https://github.com/indrimuska/angular-counter" data-icon="octicon-star" data-style="mega"
+						aria-label="Star indrimuska/angular-counter on GitHub">Star</a>
+				</li>
+				<li>
+					<a class="github-button" href="https://github.com/indrimuska/angular-counter/fork" data-icon="octicon-git-branch" data-style="mega"
+						aria-label="Fork indrimuska/angular-counter on GitHub">Fork</a>
+				</li>
+				<li>
+					<a class="github-button" href="https://github.com/indrimuska/angular-counter" data-icon="octicon-eye" data-style="mega"
+						aria-label="Watch indrimuska/angular-counter on GitHub">Watch</a>
+				</li>
+				<li>
+					<a class="github-button" href="https://github.com/indrimuska/angular-counter/issues" data-icon="octicon-issue-opened" data-style="mega"
+						aria-label="Issue indrimuska/angular-counter on GitHub">Issue</a>
+				</li>
+				<li>
+					<a class="github-button" href="https://github.com/indrimuska/angular-counter/archive/master.zip" data-icon="octicon-cloud-download" data-style="mega"
+						aria-label="Download indrimuska/angular-counter on GitHub">Download</a>
+				</li>
+			</ul>
+			
+			<div id="controls" class="row">
+				<div class="col-xs-4 col-sm-3">
+					<label>
+						To:
+						<input type="number" ng-model="ctrl.to" class="form-control" step="100" min="0">
+					</label>
+				</div>
+				<div class="col-xs-4 col-sm-3">
+					<label>
+						Duration (ms):
+						<input type="number" ng-model="ctrl.duration" class="form-control" step="100" min="0">
+					</label>
+				</div>
+				<div class="col-xs-10 col-sm-6">
+					<label>
+						Effect:
+						<select ng-model="ctrl.effect" class="form-control" ng-options="effect for effect in ctrl.effects"></select>
+					</label>
+				</div>
+			</div>
+			
+			<div class="counter"
+				value="ctrl.value"
+				to="ctrl.to"
+				duration="ctrl.duration"
+				effect="ctrl.effect"
+				finish="ctrl.counterFinish()">
+				<span ng-bind="ctrl.value | number:0"></span>%
+				<p>
+					<span class="label label-warning" ng-if="ctrl.finish">Finish</span>
+				</p>
+			</div>
+			
+			<h3>Installation</h3>
+			<pre><code class="html">&lt;script src=&quot;http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;./js/angular-counter.js&quot;&gt;&lt;/script&gt;</code></pre>
+			<pre><code class="js">var app = angular.module('MyApp', ['counter']);</code></pre>
+			
+			<h3>Usage</h3>
+			<pre><code class="html" ng-non-bindable>&lt;!-- `counter` directive can be used as: Element / Class / Attribute --&gt;
+&lt;div    class=&quot;counter&quot;
+        value=&quot;ctrl.value&quot;
+           to=&quot;ctrl.to&quot;
+     duration=&quot;ctrl.duration&quot;
+       effect=&quot;ctrl.effect&quot;
+       finish=&quot;ctrl.counterFinish()&quot;&gt; {{ ctrl.value | number:0 }} % &lt;/div&gt;
+
+&lt;!-- bind counter value anywhere --&gt;
+&lt;span ng-bind=&quot;ctrl.value&quot;&gt;&lt;/span&gt;</code></pre>
+			<span class="label label-info">INFO</span>&nbsp; Animation starts every time the attribute <code>to</code> changes.
+			
+			<footer class="footer">
+				<div class="pull-right">
+					<a class="github-button" href="https://github.com/indrimuska" data-style="mega" aria-label="Follow @indrimuska on GitHub">Follow @indrimuska</a>
+				</div>
+				<div>
+					<h4>Indri Muska</h4>
+					<p><a href="https://gitter.im/indrimuska/angular-counter" target="_blank"><img src="https://badges.gitter.im/Join%20Chat.svg" alt="Gitter"></a></p>
+				</div>
+			</footer>
+			
+			<a href="https://github.com/indrimuska/angular-counter" target="_blank" class="fork-me-ribbon">
+				<img src="https://s3.amazonaws.com/github/ribbons/forkme_right_orange_ff7600.png" alt="Fork me on GitHub">
+			</a>
+			
+		</div>
+		
+		<!-- Scripts -->
+		<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+		<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
+		<script src="https://code.angularjs.org/1.4.4/angular.min.js"></script>
+		<script src="https://code.angularjs.org/1.4.4/angular-animate.min.js"></script>
+		<script src="https://rawgit.com/indrimuska/angular-counter/master/js/angular-selector.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.3/highlight.min.js"></script>
+		<script src="https://buttons.github.io/buttons.js" async defer id="github-bjs"></script>
+		<script src="script.js"></script>
+		<!--
+		<script>
+		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+		ga('create', 'UA-67205107-1', 'auto'); ga('send', 'pageview');
+		</script>
+		<script>
+		!function(g,s,q,r,d){r=g[r]=g[r]||function(){(r.q=r.q||[]).push(
+		arguments)};d=s.createElement(q);q=s.getElementsByTagName(q)[0];
+		d.src='//d1l6p2sc9645hc.cloudfront.net/tracker.js';q.parentNode.
+		insertBefore(d,q)}(window,document,'script','_gs');
+		_gs('GSN-458730-T');
+		</script>
+		-->
+	</body>
