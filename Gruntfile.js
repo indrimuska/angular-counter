@@ -12,7 +12,8 @@ module.exports = function(grunt) {
 			},
 			main: {
 				files: {
-					'js/angular-counter.min.js': ['js/angular-counter.js']
+					'js/angular-counter.min.js': ['js/angular-counter.js'],
+					'js/angular-counter-with-easing.min.js': ['js/jquery.easing.min.js', 'js/angular-counter.js']
 				}
 			}
 		},
