@@ -51,9 +51,6 @@ angular
             });
             $timeout(function () {
                 ctrl.finish = false;
-                $timeout(function () {
-                    ctrl.to = 0;
-                }, 2000);
             }, 100);
         };
         
