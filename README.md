@@ -1,5 +1,7 @@
 # Angular Counter
 
+[![Join the chat at https://gitter.im/indrimuska/angular-counter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/indrimuska/angular-counter?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 **Angular Counter** is a *directive* to animate number increment/decrement.
 
 Check out the demo page at http://indrimuska.github.io/angular-counter.
