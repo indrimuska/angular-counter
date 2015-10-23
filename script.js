@@ -1,13 +1,13 @@
 angular
-    .module('AngularCounterDemo', ['counter', 'ngAnimate'])
+    .module('AngularCounterDemo', ['counter'])
     .controller('AngularCounterDemoCtrl', ['$scope', '$timeout', function ($scope, $timeout) {
         var ctrl = this;
         
-        ctrl.value    = 0;
-        ctrl.to       = 100;
-        ctrl.duration = 3000;
-        
-        ctrl.effect   = 'linear';
+        ctrl.myValue    = 0;
+        ctrl.myTarget   = 100;
+        ctrl.myDuration = 2000;
+        ctrl.myEffect = 'easeOutBack';
+		
         ctrl.effects  = [
             'linear',
             'swing',
@@ -51,12 +51,14 @@ angular
             });
             $timeout(function () {
                 ctrl.finish = false;
-            }, 100);
+            }, 1000);
         };
-        
-        $scope.$watch('ctrl.effect', function () {
-            ctrl.to = ctrl.to ? 0 : 100;
-        });
+		
+		ctrl.toggleTarget = function () {
+            ctrl.myTarget = ctrl.myTarget ? 0 : 100;
+		};
+		
+        $scope.$watch('ctrl.myEffect', ctrl.toggleTarget);
     }]);
 
 hljs.initHighlightingOnLoad();

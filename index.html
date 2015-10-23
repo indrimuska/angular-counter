@@ -62,33 +62,41 @@
 				<div class="col-xs-4 col-sm-3">
 					<label>
 						To:
-						<input type="number" ng-model="ctrl.to" class="form-control" step="100" min="0">
+						<input type="number" ng-model="ctrl.myTarget" class="form-control" step="100" min="0">
 					</label>
 				</div>
 				<div class="col-xs-4 col-sm-3">
 					<label>
 						Duration (ms):
-						<input type="number" ng-model="ctrl.duration" class="form-control" step="100" min="0">
+						<input type="number" ng-model="ctrl.myDuration" class="form-control" step="100" min="0">
 					</label>
 				</div>
 				<div class="col-xs-10 col-sm-6">
 					<label>
 						Effect:
-						<select ng-model="ctrl.effect" class="form-control" ng-options="effect for effect in ctrl.effects"></select>
+						<select ng-model="ctrl.myEffect" class="form-control" ng-options="effect for effect in ctrl.effects"></select>
 					</label>
 				</div>
 			</div>
 			
-			<div class="counter"
-				value="ctrl.value"
-				to="ctrl.to"
-				duration="ctrl.duration"
-				effect="ctrl.effect"
-				finish="ctrl.counterFinish()">
-				<span ng-bind="ctrl.value | number:0"></span>%
-				<p>
+			<div   class="counter number"
+				   value="ctrl.myValue"
+				      to="ctrl.myTarget"
+				duration="ctrl.myDuration"
+				  effect="ctrl.myEffect"
+				  finish="ctrl.counterFinish()">
+				
+				<span class="value" ng-bind="(ctrl.myValue | number:0) + '%'"></span>
+				<div class="progress">
+					<div class="progress-bar progress-bar-info" role="progressbar" ng-style="{ width: ctrl.myValue + '%' }">
+						{{ ctrl.myValue | number: 0 }}%
+					</div>
+				</div>
+				<small>If you use Bootstrap progress bars remember to remove <code>transition</code> rule in your stylesheet!</small>
+				
+				<div class="finish-label">
 					<span class="label label-warning" ng-if="ctrl.finish">Finish</span>
-				</p>
+				</div>
 			</div>
 			
 			<h3>Installation</h3>
@@ -102,14 +110,60 @@
 			<pre><code class="html" ng-non-bindable>&lt;!-- `counter` directive can be used as: Element / Class / Attribute --&gt;
 &lt;div    class=&quot;counter&quot;
         value=&quot;ctrl.myValue&quot;
-           to=&quot;ctrl.numberToReach&quot;
-     duration=&quot;ctrl.theDuration&quot;
+           to=&quot;ctrl.myTarget&quot;
+     duration=&quot;ctrl.myDuration&quot;
        effect=&quot;ctrl.myEffect&quot;
-       finish=&quot;ctrl.counterFinish()&quot;&gt; {{ ctrl.value | number:0 }} % &lt;/div&gt;
+       finish=&quot;ctrl.counterFinish()&quot;&gt; {{ ctrl.myValue | number:0 }} % &lt;/div&gt;
 
 &lt;!-- bind counter value anywhere --&gt;
-&lt;span ng-bind=&quot;ctrl.value&quot;&gt;&lt;/span&gt;</code></pre>
+&lt;span ng-bind=&quot;ctrl.myValue&quot;&gt;&lt;/span&gt;</code></pre>
 			<span class="label label-info">INFO</span>&nbsp; Animation starts every time the attribute <code>to</code> changes.
+			
+			<h3>Service</h3>
+			<b>Angular Counter</b> directive makes use of a built-in service <code>$counter</code> with a single <code>.count(..)</code>
+			that requires the following parameters:
+			
+			<table class="table">
+				<thead>
+					<tr>
+						<th>Parameter</th>
+						<th>Type</th>
+						<th>Description</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>from</td>
+						<td><code>float</code></td>
+						<td>Initial number.</td>
+					</tr>
+					<tr>
+						<td>to</td>
+						<td><code>float</code></td>
+						<td>Target number to reach.</td>
+					</tr>
+					<tr>
+						<td>duration</td>
+						<td><code>integer</code></td>
+						<td>Duration of the animation in ms.</td>
+					</tr>
+					<tr>
+						<td>effect</td>
+						<td><code>string</code></td>
+						<td>Effect name.</td>
+					</tr>
+					<tr>
+						<td>step</td>
+						<td><code>function</code></td>
+						<td>Callback after each animation step.<br><small>Remember to <code>$apply</code> the scope!</small></td>
+					</tr>
+					<tr>
+						<td>finish</td>
+						<td><code>function</code></td>
+						<td>Callback at the end of the animation.</td>
+					</tr>
+				</tbody>
+			</table>
 			
 			<footer class="footer">
 				<div class="pull-right">
@@ -131,7 +185,6 @@
 		<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 		<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
 		<script src="https://code.angularjs.org/1.4.4/angular.min.js"></script>
-		<script src="https://code.angularjs.org/1.4.4/angular-animate.min.js"></script>
 		<script src="https://rawgit.com/indrimuska/angular-counter/master/js/angular-counter.min.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.3/highlight.min.js"></script>
 		<script src="https://buttons.github.io/buttons.js" async defer id="github-bjs"></script>
