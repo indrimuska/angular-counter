@@ -1,9 +1,29 @@
 (function (angular) {
 	
-	var Counter = (function () {
+	// service
+	var CounterService = (function () {
 		
-		// Counter directive
-		function Counter(timeout) {
+		function CounterService() {
+		};
+		CounterService.prototype.count = function (from, to, duration, effect, step, finish) {
+			if (parseFloat(from || 0) == parseFloat(to || 0)) return;
+			
+			$({ value: parseFloat(from || 0) }).animate({ value: parseFloat(to || 0) }, {
+				duration: duration,
+				easing: effect,
+				step: step
+			}).promise().done(function () {
+				if (angular.isFunction(finish)) finish();
+			});
+		};
+		
+		return CounterService;
+	})();
+	
+	// directive
+	var CounterDirective = (function () {
+		
+		function CounterDirective(counter, timeout) {
 			this.restrict = 'EAC';
 			this.scope = {
 				to:       '=',
@@ -12,10 +32,11 @@
 				duration: '=?',
 				finish:   '&?'
 			};
+			$counter = counter;
 			$timeout = timeout;
-		}
-		Counter.prototype.$inject = ['$timeout'];
-		Counter.prototype.link = function ($scope, $element, $attrs, $controller) {
+		};
+		CounterDirective.prototype.$inject = ['$counter', '$timeout'];
+		CounterDirective.prototype.link = function ($scope, $element, $attrs, $controller) {
 			var defaults = {
 					effect:   'linear',
 					duration: 1000
@@ -28,31 +49,29 @@
 				if (!angular.isDefined($scope[key])) $scope[key] = defaults[key];
 			});
 			
-			$scope.$watch('to', function () {
-				if (parseFloat($scope.value || 0) == parseFloat($scope.to || 0)) return;
-				$({ value: parseFloat($scope.value || 0) }).animate({ value: parseFloat($scope.to) }, {
-					duration: $scope.duration,
-					easing: $scope.effect,
-					step: function (value) {
-						$timeout(function () {
-							$scope.$apply(function () {
-								$scope.value = value;
-							});
-						});
-					}
-				}).promise().done(function () {
-					if (angular.isFunction($scope.finish)) $scope.finish();
+			$scope.step = function (value) {
+				$timeout(function () {
+					$scope.$apply(function () {
+						$scope.value = value;
+					});
 				});
+			};
+			
+			$scope.$watch('to', function () {
+				$counter.count($scope.value, $scope.to, $scope.duration, $scope.effect, $scope.step, $scope.finish);
 			});
 		};
 		
-		return Counter;
+		return CounterDirective;
 	})();
 	
 	angular
 		.module('counter', [])
-		.directive('counter', ['$timeout', function ($timeout) {
-			return new Counter($timeout);
+		.service('$counter', function () {
+			return new CounterService();
+		})
+		.directive('counter', ['$counter', '$timeout', function ($counter, $timeout) {
+			return new CounterDirective($counter, $timeout);
 		}]);
 	
 })(window.angular);
