@@ -52,6 +52,8 @@ var app = angular.module('MyApp', ['counter']);
 
 Parameter | Type | Description
 ---|---|---
+object | `object` | Object containing the number to animate.
+property | `string` | Property of `object` to be updated.
 from | `float` | Initial number.
 to | `float` | Target number to reach.
 duration | `integer` | Duration of the animation in ms.

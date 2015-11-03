@@ -4,16 +4,18 @@
 	var CounterService = (function () {
 		
 		function CounterService() {
-			this.counter = { value : 0 };
 		};
-		CounterService.prototype.count = function (from, to, duration, effect, step, finish) {
+		CounterService.prototype.count = function (object, property, from, to, duration, effect, step, finish) {
+			var target = {};
+			
 			// stop previous animation
-			$(this.counter).stop(true, true);
-			this.counter.value = parseFloat(from || 0);
+			$(object).stop(true, true);
+			object[property] = parseFloat(from || 0);
+			target[property] = parseFloat(to || 0);
 			
-			if (this.counter.value == parseFloat(to || 0)) return;
+			if (object[property] == target[property]) return;
 			
-			$(this.counter).animate({ value: parseFloat(to || 0) }, {
+			$(object).animate(target, {
 				duration: duration,
 				easing: effect,
 				step: step
@@ -63,7 +65,7 @@
 			};
 			
 			$scope.$watch('to', function () {
-				$counter.count($scope.value, $scope.to, $scope.duration, $scope.effect, $scope.step, $scope.finish);
+				$counter.count($scope, 'value', $scope.value, $scope.to, $scope.duration, $scope.effect, $scope.step, $scope.finish);
 			});
 		};
 		
