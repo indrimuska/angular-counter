@@ -4,11 +4,16 @@
 	var CounterService = (function () {
 		
 		function CounterService() {
+			this.counter = { value : 0 };
 		};
 		CounterService.prototype.count = function (from, to, duration, effect, step, finish) {
-			if (parseFloat(from || 0) == parseFloat(to || 0)) return;
+			// stop previous animation
+			$(this.counter).stop(true, true);
+			this.counter.value = parseFloat(from || 0);
 			
-			$({ value: parseFloat(from || 0) }).animate({ value: parseFloat(to || 0) }, {
+			if (this.counter.value == parseFloat(to || 0)) return;
+			
+			$(this.counter).animate({ value: parseFloat(to || 0) }, {
 				duration: duration,
 				easing: effect,
 				step: step
