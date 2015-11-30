@@ -16,8 +16,14 @@ Check out the demo page at http://indrimuska.github.io/angular-counter.
 
 ## Installation
 
-In your HTML file:
+Get **Angular Counter** from `npm`, `bower` or `git`:
+```
+  npm install angular-counter
+bower install angular-counter-animation
+  git clone   https://github.com/indrimuska/angular-counter.git 
+```
 
+Update your HTML file:
 ```html
 <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
@@ -25,7 +31,7 @@ In your HTML file:
 <script src="./js/angular-counter.js"></script>
 ```
 
-In your JS code:
+And your AngularJS module:
 ```js
 var app = angular.module('MyApp', ['counter']);
 ```
