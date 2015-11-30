@@ -42,7 +42,7 @@ var app = angular.module('MyApp', ['counter']);
 <!-- `counter` directive can be used as: Element / Class / Attribute -->
 <div    class="counter"
         value="ctrl.myValue"
-           to="ctrl.myTarge"
+           to="ctrl.myTarget"
      duration="ctrl.myDuration"
        effect="ctrl.myEffect"
        finish="ctrl.counterFinish()"> {{ ctrl.myValue | number:0 }} % </div>
@@ -51,6 +51,8 @@ var app = angular.module('MyApp', ['counter']);
 <span ng-bind="ctrl.myValue"></span>
 ```
 **INFO**: Animation starts every time the attribute `to` changes.
+
+**Directive examples:** http://plnkr.co/edit/d1KPDa?p=preview
 
 ## Service
 
