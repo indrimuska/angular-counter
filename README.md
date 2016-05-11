@@ -56,7 +56,7 @@ var app = angular.module('MyApp', ['counter']);
 
 ## Service
 
-*Angular Counter* directive makes use of a built-in service `$counter` with a single `.count(..)` that requires the following parameters:
+*Angular Counter* directive makes use of a built-in service `$counter` with a single function `.count(..)` that requires the following parameters:
 
 Parameter | Type | Description
 ---|---|---
