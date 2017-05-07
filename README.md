@@ -6,7 +6,7 @@
 
 Check out the demo page at http://indrimuska.github.io/angular-counter.
 
-![Angular Counter](http://indrimuska.github.io/angular-counter/img/angular-counter.gif)
+![Angular Counter](https://cloud.githubusercontent.com/assets/1561134/25781148/caaaec2e-3335-11e7-96cc-f23de5ccc272.gif)
 
 ## Dependencies
 
