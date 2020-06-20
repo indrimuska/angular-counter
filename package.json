@@ -22,7 +22,7 @@
   },
   "homepage": "http://indrimuska.github.io/angular-counter",
   "dependencies": {
-    "angular": "~1.4.3",
+    "angular": "~1.8.0",
     "jquery": "~1.7.1"
   },
   "devDependencies": {
